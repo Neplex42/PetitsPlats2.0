@@ -52,7 +52,13 @@
 
 .dropdown-options .dropdown-options_item {
   cursor: pointer;
-    padding: 5px 16px;
+  padding: 5px 16px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-options .dropdown-options_item:hover {
+  background: #FFD15B;
+  font-weight: 700;
 }
 
 .dropdown-options .dropdown-item {
@@ -64,7 +70,21 @@
 
 .dropdown-options .active {
   background: #FFD15B;
-  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown-options .dropdown-item-close-svg {
+  display: none;
+  opacity: 0;
+}
+
+.dropdown-options .display_icon {
+  display: block;
+}
+
+.dropdown-options .active:hover .display_icon {
+  opacity: 1;
 }
 
 .sticky .form-control__icon-clear, .form-control__icon-search {
@@ -101,6 +121,15 @@
   padding-top: 4px;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.filter .dropdown-menu_open {
+  height: auto;
+  opacity: 1;
+  transition: all 0.3s ease;
 }
 
 .filter .filter-button {
@@ -117,6 +146,15 @@
   font-size: 16px;
   letter-spacing: 0.07em;
   width: 100%;
+  transition: all 0.3s ease;
+}
+
+.filter .filter-button i {
+  transition: all 0.2s ease;
+}
+
+.filter .filter-button_open i {
+  transform: rotate(180deg);
 }
 
 .filter-bar .options-bar {

@@ -4,7 +4,7 @@ main {
 
 .recipes-cards {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 50px;
   margin-top: 55px;
   flex-wrap: wrap;

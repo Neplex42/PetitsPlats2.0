@@ -1,7 +1,13 @@
-console.log('Coucou')
+import { recipes } from "../../data/recipes.js";
+import {
+  displayRecipes,
+  toggleDropdownOptions,
+  toggleFilterButton,
+} from "../events/eventHandlers.js";
 
-document.querySelectorAll('.dropdown-options_item').forEach((item) => {
-  item.addEventListener('click', () => {
-    item.classList.toggle('active');
-  });
-});
+document.addEventListener("DOMContentLoaded", () => {
+  displayRecipes(recipes);
+
+  toggleDropdownOptions();
+  toggleFilterButton();
+})
