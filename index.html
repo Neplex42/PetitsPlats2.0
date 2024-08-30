@@ -10,9 +10,13 @@
     <meta name="keywords" content="recettes, cuisine, repas, ingrédients, appareils, ustensiles, plats, délicieux">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;700&display=swap"
           rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="shortcut icon" href="./assets/logo/favicon.png" type="image/x-icon">
     <title>Les Petits Plats</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/card.css">
 </head>
 <body>
 <header>
@@ -37,7 +41,7 @@
             </form>
         </div>
     </div>
-    <img src="./assets/images/bg-header.jpeg" alt="Bannière du header de petits plats">
+    <img class="img_header_banner" src="./assets/images/bg-header.jpeg" alt="Bannière du header de petits plats">
 </header>
 <main>
     <div class="container page-width_main">
@@ -50,7 +54,7 @@
                         Ingrédients
                         <i class="bi bi-chevron-down" aria-hidden="true"></i>
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="1-Dropdown" id="1-list">
+                    <div class="dropdown-menu" aria-labelledby="1-Dropdown" id="1-list" >
                         <div class="sticky">
                             <label for="1-search" class="visually-hidden">Rechercher Ingrédients</label>
                             <input id="1-search" type="text" class="form-control mb-2" placeholder="Rechercher...">
@@ -63,22 +67,26 @@
                             </button>
                         </div>
                         <ul class="dropdown-options" role="listbox" aria-labelledby="appliancesDropdown">
-                            <li><a class="dropdown-item " href="#" style="">blender </a></li>
-                            <li><a class="dropdown-item " href="#" style="">casserole </a></li>
-                            <li><a class="dropdown-item " href="#" style="">cocotte </a></li>
-                            <li><a class="dropdown-item " href="#" style="">cuiseur de riz </a></li>
-                            <li><a class="dropdown-item " href="#" style="">four </a></li>
-                            <li><a class="dropdown-item " href="#" style="">mixer </a></li>
-                            <li><a class="dropdown-item " href="#" style="">moule à charlotte </a></li>
-                            <li><a class="dropdown-item " href="#" style="">poêle </a></li>
-                            <li><a class="dropdown-item " href="#" style="">poêle à crêpe </a></li>
-                            <li><a class="dropdown-item " href="#" style="">saladier </a></li>
-                            <li><a class="dropdown-item " href="#" style="">sauteuse </a></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item ">blender </p><img src="./assets/images/close_cross.svg" alt="Icon de croix fermeture"></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item " >casserole </p></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item ">cocotte </p></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item ">cuiseur de riz </p></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item ">four </p></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item ">mixer </p></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item ">moule à charlotte </p></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item ">poêle </p></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item ">poêle à crêpe </p></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item ">saladier </p></li>
+                            <li class="dropdown-options_item"><p class="dropdown-item ">sauteuse </p></li>
                         </ul>
                     </div>
                 </div>
+
+                <div class="options-bar">
+                    <div class="selected-option"><p>crème de coco</p> <i class="bi bi-x-lg"></i></div>
+                </div>
             </div>
-            <p class="filter-number" aria-live="polite"></p>
+            <p class="filter-number title" aria-live="polite">50 recettes</p>
         </section>
         <section class="recipes" aria-labelledby="recipes-heading">
             <h2 id="recipes-heading" class="visually-hidden">Recettes</h2>
@@ -87,10 +95,104 @@
                 <!-- recipe Cards will be dynamically inserted here -->
                 <article id="recipe-1" class="recipes-card" tabindex="0">
                     <div class="recipe-card card">
-                        <img class="card-img-top" src="assets/images/Recette01.jpg" alt="" loading="lazy">
+                        <div class="recipe-card-img-container">
+                            <img class="card-img-top" src="assets/images/Recette01.jpg" alt="" loading="lazy">
+                        </div>
                         <span class="recipe-card__time">10 min</span>
                         <div class="card-body">
-                            <h2 class="card-title">Limonade de coco</h2>
+                            <h2 class="card-title title">Limonade de coco</h2>
+                            <div class="card-description">
+                                <div class="card-description__recipe">
+                                    <h3 class="card-description__name">RECETTE</h3>
+                                    <p class="card-description__text">Mettre les glaçons à votre goût dans le blender,
+                                        Ajouter le lait la crème de coco, le jus de 2 citrons et le sucre ensemble.
+                                        Mixer jusqu'à obtenir la consistance désirée. Mixer jusqu'à obtenir la
+                                        consistance désirée. Mixer jusqu'à obtenir la consistance désirée.</p>
+                                </div>
+                                <div class="card-description__ingredients">
+                                    <h3 class="card-description__name">INGRÉDIENTS</h3>
+                                    <ul class="card-description__list">
+                                        <li class="card-description__item">
+                                            <p class="card-description__item-ingredients">Lait de coco</p>
+                                            <p class="card-description__item-quantity">400ml</p>
+                                        </li>
+                                        <li class="card-description__item">
+                                            <p class="card-description__item-ingredients">Jus de citron</p>
+                                            <p class="card-description__item-quantity">2</p>
+                                        </li>
+                                        <li class="card-description__item">
+                                            <p class="card-description__item-ingredients">Créme de coco</p>
+                                            <p class="card-description__item-quantity">4 cuillères</p>
+                                        </li>
+                                        <li class="card-description__item">
+                                            <p class="card-description__item-ingredients">Sucre</p>
+                                            <p class="card-description__item-quantity">20g</p>
+                                        </li>
+                                        <li class="card-description__item">
+                                            <p class="card-description__item-ingredients">Glaçons</p>
+                                            <p class="card-description__item-quantity">2</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article id="recipe-2" class="recipes-card" tabindex="0">
+                    <div class="recipe-card card">
+                        <div class="recipe-card-img-container">
+                            <img class="card-img-top" src="assets/images/Recette01.jpg" alt="" loading="lazy">
+                        </div>
+                        <span class="recipe-card__time">10 min</span>
+                        <div class="card-body">
+                            <h2 class="card-title title">Limonade de coco</h2>
+                            <div class="card-description">
+                                <div class="card-description__recipe">
+                                    <h3 class="card-description__name">RECETTE</h3>
+                                    <p class="card-description__text">Mettre les glaçons à votre goût dans le blender,
+                                        Ajouter le lait la crème de coco, le jus de 2 citrons et le sucre ensemble.
+                                        Mixer jusqu'à obtenir la consistance désirée. Mixer jusqu'à obtenir la
+                                        consistance désirée. Mixer jusqu'à obtenir la consistance désirée.</p>
+                                </div>
+                                <div class="card-description__ingredients">
+                                    <h3 class="card-description__name">INGRÉDIENTS</h3>
+                                    <ul class="card-description__list">
+                                        <li class="card-description__item">
+                                            <p class="card-description__item-ingredients">Lait de coco</p>
+                                            <p class="card-description__item-quantity">400ml</p>
+                                        </li>
+                                        <li class="card-description__item">
+                                            <p class="card-description__item-ingredients">Jus de citron</p>
+                                            <p class="card-description__item-quantity">2</p>
+                                        </li>
+                                        <li class="card-description__item">
+                                            <p class="card-description__item-ingredients">Créme de coco</p>
+                                            <p class="card-description__item-quantity">4 cuillères</p>
+                                        </li>
+                                        <li class="card-description__item">
+                                            <p class="card-description__item-ingredients">Sucre</p>
+                                            <p class="card-description__item-quantity">20g</p>
+                                        </li>
+                                        <li class="card-description__item">
+                                            <p class="card-description__item-ingredients">Glaçons</p>
+                                            <p class="card-description__item-quantity">2</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article id="recipe-3" class="recipes-card" tabindex="0">
+                    <div class="recipe-card card">
+                        <div class="recipe-card-img-container">
+                            <img class="card-img-top" src="assets/images/Recette01.jpg" alt="" loading="lazy">
+                        </div>
+                        <span class="recipe-card__time">10 min</span>
+                        <div class="card-body">
+                            <h2 class="card-title title">Limonade de coco</h2>
                             <div class="card-description">
                                 <div class="card-description__recipe">
                                     <h3 class="card-description__name">RECETTE</h3>

@@ -1,0 +1,129 @@
+header {
+  position: relative;
+  padding-bottom: 188px;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.img_header_banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.page-width_header {
+  max-width: 1600px;
+  padding: 0 68px;
+  margin: 0 auto;
+}
+
+.page-width_header nav {
+  padding-top: 51px;
+  margin-bottom: 160px;
+}
+
+.page-width_header nav img {
+  width: 207px;
+  height: 25px;
+}
+
+.page-width_header .hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-width_header .hero .title {
+  font-size: clamp(1.375rem, 0.9821rem + 1.9643vw, 2.75rem);;
+  margin-bottom: 30px;
+  color: #FFD15B;
+  max-width: 55%;
+  text-align: center;
+  letter-spacing: 0.001em;
+  line-height: 67px;
+}
+
+.page-width_header .hero-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 73%;
+  position: relative;
+}
+
+.page-width_header .hero-form__input {
+  position: relative;
+  width: 100%;
+  padding: 28px 80px 28px 35px;
+  border-radius: 11px;
+  color: #7a7a7a;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  outline: none;
+  border: none;
+}
+
+.page-width_header .hero-form-button {
+  width: 51px;
+  height: 52px;
+  background-color: #1b1b1b;
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  position: absolute;
+  right: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.page-width_header .hero-form-button:hover {
+  background: #FFD15B;
+}
+
+.page-width_header .hero-form-button i {
+  font-size: 25px;
+}
+
+/* Responsive CSS pour tablette (990px - 1200px) */
+@media (max-width: 1200px) {}
+
+/* Responsive CSS pour mobile (750px - 990px) */
+@media (max-width: 990px) {
+  header {
+    padding-bottom: 100px;
+  }
+
+  .page-width_header {
+    padding: 0 30px;
+  }
+
+  .page-width_header nav {
+    margin-bottom: 50px;
+  }
+
+  .page-width_header .hero .title {
+    line-height: 35px;
+  }
+
+  .page-width_header .hero .title, .page-width_header .hero-form {
+    max-width: 100%;
+    width: 100%;
+  }
+}
