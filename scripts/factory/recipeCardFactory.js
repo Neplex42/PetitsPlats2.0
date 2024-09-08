@@ -1,5 +1,4 @@
-// Description: Factory function to create a recipe card.
-
+// Description: Fonction qui crée une carte de recette
 export function createRecipeCard(data) {
   const { id, image, name, ingredients, time, description } = data;
   const imageSrc = `./assets/images/${image}`;
@@ -34,6 +33,7 @@ export function createRecipeCard(data) {
   return card;
 }
 
+// Description: Fonction qui génère la liste des ingrédients
 function generateIngredientsList(ingredients) {
   return ingredients
     .map(
