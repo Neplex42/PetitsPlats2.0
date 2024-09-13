@@ -1,94 +1,63 @@
 import { createRecipeCard } from "../factory/recipeCardFactory.js";
 import { createTagDropdown } from "../factory/tagDropdownFactory.js";
+import { setupDropdownFilter } from "../sort/sortDropdownResult.js";
 
 // Description: Fonction qui affiche les recettes
-export function displayRecipes(recipes, keyword) {
+export function displayRecipes(recipes, keyword = "") {
   const recipeCards = document.querySelector(".recipes-cards");
   const errorMessage = document.querySelector(".recipes-cards__error-message");
 
   recipeCards.innerHTML = "";
   if (recipes.length === 0) {
     if (errorMessage) {
-      errorMessage.textContent = `Aucune recette ne contient ‘${keyword}’ vous pouvez chercher «tarte aux pommes», «poisson», etc.`;
+      errorMessage.textContent = `Aucune recette ne correspond à ‘${keyword}’ avec les filtres actuels.`;
       errorMessage.style.display = "block";
     }
   } else {
     if (errorMessage) {
       errorMessage.style.display = "none";
     }
-    recipeCards.innerHTML = recipes.map((recipe) => createRecipeCard(recipe).outerHTML).join("");
+    recipeCards.innerHTML = recipes.map(recipe => createRecipeCard(recipe).outerHTML).join("");
   }
 }
 
+
 // Fonction pour afficher les dropdowns de manière unique pour chaque catégorie
-export function displayTagDropdowns(recipes) {
-  console.log("Affichage des dropdowns pour les recettes", recipes);
+export function displayTagDropdowns(recipes, selectedIngredients, selectedAppliances, selectedUtensils) {
+  let allIngredients = [];
+  let allAppliances = new Set();
+  let allUstensils = new Set();
 
-  // Préparer les données combinées
-  const allIngredients = [];
-  const allAppliances = new Set();
-  const allUstensils = new Set();
-
-  // Parcourir les recettes pour remplir les arrays
   recipes.forEach((recipe) => {
-    // Ajouter les ingrédients
     recipe.ingredients.forEach((ingredient) => {
       allIngredients.push(ingredient.ingredient);
     });
-
-    // Ajouter les appareils (les sets permettent d'éviter les doublons)
     allAppliances.add(recipe.appliance);
-
-    // Ajouter les ustensiles
-    recipe.ustensils.forEach((ustensil) => {
-      allUstensils.add(ustensil);
+    recipe.ustensils.forEach((utensil) => {
+      allUstensils.add(utensil);
     });
   });
 
-  // Supprimer les doublons dans les ingrédients
-  const uniqueIngredients = [...new Set(allIngredients)];
+  let uniqueIngredients = [...new Set(allIngredients)];
+  let uniqueAppliances = Array.from(allAppliances);
+  let uniqueUstensils = Array.from(allUstensils);
 
-  // Récupérer les éléments HTML où les dropdowns doivent être ajoutés
   const filterOptions = document.querySelector('div.filter-bar');
 
-  if (!filterOptions) {
-    console.error("filter-bar__options element not found");
-    return;
-  }
+  if (!filterOptions) return;
 
-  // Générer et ajouter les dropdowns pour chaque catégorie
-  const ingredientsDropdown = createTagDropdown(1, "Ingrédients", uniqueIngredients);
-  const appliancesDropdown = createTagDropdown(2, "Appareils", Array.from(allAppliances));
-  const utensilsDropdown = createTagDropdown(3, "Ustensiles", Array.from(allUstensils));
+  const ingredientsDropdown = createTagDropdown(1, 'ingredients', "Ingrédients", uniqueIngredients);
+  const appliancesDropdown = createTagDropdown(2, 'appliances', "Appareils", uniqueAppliances);
+  const utensilsDropdown = createTagDropdown(3, 'utensils', "Ustensiles", uniqueUstensils);
 
-  // Ajouter chaque dropdown dans le DOM
   filterOptions.appendChild(ingredientsDropdown);
   filterOptions.appendChild(appliancesDropdown);
   filterOptions.appendChild(utensilsDropdown);
 
-  console.log("Dropdowns ajoutés au DOM");
-}
-
-export function toggleDropdownOptions() {
-  document.querySelectorAll('.dropdown-options_item')?.forEach((item) => {
-    item.addEventListener('click', () => {
-      item.classList.toggle('active');
-      item.querySelector('.dropdown-item-close-svg').classList.toggle('display_icon', item.classList.contains('active'));
-    });
-  });
-}
-
-export function toggleFilterButton() {
-  document.querySelectorAll('.filter-button.dropdown-toggle').forEach((button) => {
-    button.addEventListener('click', () => {
-      button.classList.toggle('filter-button_open');
-
-      const dropdownMenu = button.nextElementSibling;
-      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-        dropdownMenu.classList.toggle('dropdown-menu_open');
-      }
-    });
-  });
+  // Passer les tags sélectionnés aux filtres
+  setupDropdownFilter('.dropdown-1 .form-control', '.form-control__icon-clear-1', uniqueIngredients, '.dropdown-1 .dropdown-options', selectedIngredients);
+  setupDropdownFilter('.dropdown-2 .form-control', '.form-control__icon-clear-2', uniqueAppliances, '.dropdown-2 .dropdown-options', selectedAppliances);
+  setupDropdownFilter('.dropdown-3 .form-control', '.form-control__icon-clear-3', uniqueUstensils, '.dropdown-3 .dropdown-options', selectedUtensils);
 }
 
 
