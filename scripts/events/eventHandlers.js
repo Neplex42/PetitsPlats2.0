@@ -10,8 +10,8 @@ export function displayRecipes(recipes, keyword = "") {
   recipeCards.innerHTML = "";
   if (recipes.length === 0) {
     if (errorMessage) {
-      errorMessage.textContent = `Aucune recette ne correspond à ‘${keyword}’ avec les filtres actuels.`;
-      errorMessage.style.display = "block";
+      errorMessage.textContent = `Aucune recette ne correspond à votre recherche avec les filtres actuels.`;
+      errorMessage.style.display = "flex";
     }
   } else {
     if (errorMessage) {

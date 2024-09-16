@@ -19,6 +19,7 @@ export function setupDropdownFilter(inputSelector, clearSearchInput, optionsArra
           const isActive = selectedItems.includes(option);  // Garder les items déjà actifs
           return `<li class="dropdown-options_item${isActive ? ' active' : ''}">
                     <p class="dropdown-item">${option}</p>
+                    <img class="dropdown-item-close-svg" src="./assets/images/close_cross.svg" alt="Icon de croix fermeture">
                   </li>`;
         })
         .join('');
@@ -39,6 +40,7 @@ export function setupDropdownFilter(inputSelector, clearSearchInput, optionsArra
           const isActive = selectedItems.includes(option);
           return `<li class="dropdown-options_item${isActive ? ' active' : ''}">
                     <p class="dropdown-item">${option}</p>
+                    <img class="dropdown-item-close-svg" src="./assets/images/close_cross.svg" alt="Icon de croix fermeture">
                   </li>`;
         })
         .join('');
@@ -55,6 +57,10 @@ function toggleDropdownOptions(selectedItems, updateSelectionCallback) {
   dropdownItems.forEach((item) => {
     item.addEventListener('click', () => {
       item.classList.toggle('active');
+      const closeSvg = item.querySelector('.dropdown-item-close-svg');
+        if (closeSvg) {
+          closeSvg.classList.toggle('show_close_svg');
+        }
       const itemText = item.querySelector('.dropdown-item').textContent.trim();
 
       // Utiliser le callback pour mettre à jour les éléments sélectionnés

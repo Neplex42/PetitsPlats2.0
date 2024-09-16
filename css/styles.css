@@ -79,6 +79,11 @@
   opacity: 0;
 }
 
+.dropdown-options .show_close_svg {
+  display: block;
+  opacity: 1;
+}
+
 .dropdown-options .display_icon {
   display: block;
 }
@@ -182,6 +187,15 @@
 
 .options-bar .selected-option i {
   font-size: 16px;
+}
+
+.recipes-cards__error-message {
+  justify-content: center;
+  padding: 10rem 0;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: #FFD15B;
 }
 
 /* Responsive CSS pour mobile (750px - 990px) */

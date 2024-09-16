@@ -30,8 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function toggleDropdownOptions() {
     document.querySelectorAll('.dropdown-options_item')?.forEach((item) => {
       item.addEventListener('click', () => {
-        console.log('dd')
         item.classList.toggle('active');
+
+        const closeSvg = item.querySelector('.dropdown-item-close-svg');
+        if (closeSvg) {
+          closeSvg.classList.toggle('show_close_svg');
+        }
+
         const itemText = item.querySelector('.dropdown-item').textContent.trim();
         const parentDropdown = item.closest('.dropdown-options').parentElement;
 
@@ -68,18 +73,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const filteredRecipes = recipes.filter(recipe => {
       const matchesIngredients = selectedIngredients.every(ingredient =>
-        recipe.ingredients.some(i => i.ingredient.toLowerCase() === ingredient.toLowerCase())
+          recipe.ingredients.some(i => i.ingredient.toLowerCase() === ingredient.toLowerCase())
       );
       const matchesAppliances = selectedAppliances.length === 0 || selectedAppliances.includes(recipe.appliance);
       const matchesUtensils = selectedUtensils.every(utensil =>
-        recipe.ustensils.includes(utensil)
+          recipe.ustensils.includes(utensil)
       );
 
       // Recherche par mot-clé
       const matchesSearchQuery = searchQuery === '' ||
-        recipe.name.toLowerCase().includes(searchQuery) ||
-        recipe.ingredients.some(i => i.ingredient.toLowerCase().includes(searchQuery)) ||
-        recipe.description.toLowerCase().includes(searchQuery);
+          recipe.name.toLowerCase().includes(searchQuery) ||
+          recipe.ingredients.some(i => i.ingredient.toLowerCase().includes(searchQuery)) ||
+          recipe.description.toLowerCase().includes(searchQuery);
 
       return matchesIngredients && matchesAppliances && matchesUtensils && matchesSearchQuery;
     });
