@@ -3,7 +3,7 @@ import { createTagDropdown } from "../factory/tagDropdownFactory.js";
 import { setupDropdownFilter } from "../sort/sortDropdownResult.js";
 
 // Description: Fonction qui affiche les recettes
-export function displayRecipes(recipes, keyword = "") {
+export function displayRecipes(recipes) {
   const recipeCards = document.querySelector(".recipes-cards");
   const errorMessage = document.querySelector(".recipes-cards__error-message");
 
@@ -20,7 +20,6 @@ export function displayRecipes(recipes, keyword = "") {
     recipeCards.innerHTML = recipes.map(recipe => createRecipeCard(recipe).outerHTML).join("");
   }
 }
-
 
 // Fonction pour afficher les dropdowns de manière unique pour chaque catégorie
 export function displayTagDropdowns(recipes, selectedIngredients, selectedAppliances, selectedUtensils) {

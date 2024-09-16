@@ -43,11 +43,12 @@
 
 .dropdown-menu .dropdown-options {
   margin-top: 21px;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 205px;
   scrollbar-width: thin;
   display: flex;
   flex-direction: column;
+  padding-bottom: .5rem;
 }
 
 .dropdown-options .dropdown-options_item {

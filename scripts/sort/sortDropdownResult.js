@@ -10,19 +10,19 @@ export function setupDropdownFilter(inputSelector, clearSearchInput, optionsArra
 
       // Filtrer les options correspondant à la recherche
       const filteredOptions = optionsArray.filter(option =>
-        option.toLowerCase().includes(currentValue)
+          option.toLowerCase().includes(currentValue)
       );
 
       // Mettre à jour la liste des options filtrées tout en gardant les options actives
       dropdownList.innerHTML = filteredOptions
-        .map(option => {
-          const isActive = selectedItems.includes(option);  // Garder les items déjà actifs
-          return `<li class="dropdown-options_item${isActive ? ' active' : ''}">
-                    <p class="dropdown-item">${option}</p>
-                    <img class="dropdown-item-close-svg" src="./assets/images/close_cross.svg" alt="Icon de croix fermeture">
-                  </li>`;
-        })
-        .join('');
+          .map(option => {
+            const isActive = selectedItems.includes(option);  // Garder les items déjà actifs
+            return `<li class="dropdown-options_item${isActive ? ' active' : ''}">
+              <p class="dropdown-item">${option}</p>
+              <img class="dropdown-item-close-svg${isActive ? ' show_close_svg' : ''}" src="./assets/images/close_cross.svg" alt="Icon de croix fermeture">
+            </li>`;
+          })
+          .join('');
 
       // Ré-attacher les événements de clic sur les nouveaux items
       toggleDropdownOptions(selectedItems, updateSelectionCallback);
@@ -36,14 +36,14 @@ export function setupDropdownFilter(inputSelector, clearSearchInput, optionsArra
 
       // Réinitialiser la liste complète des options
       dropdownList.innerHTML = optionsArray
-        .map(option => {
-          const isActive = selectedItems.includes(option);
-          return `<li class="dropdown-options_item${isActive ? ' active' : ''}">
-                    <p class="dropdown-item">${option}</p>
-                    <img class="dropdown-item-close-svg" src="./assets/images/close_cross.svg" alt="Icon de croix fermeture">
-                  </li>`;
-        })
-        .join('');
+          .map(option => {
+            const isActive = selectedItems.includes(option);
+            return `<li class="dropdown-options_item${isActive ? ' active' : ''}">
+              <p class="dropdown-item">${option}</p>
+              <img class="dropdown-item-close-svg${isActive ? ' show_close_svg' : ''}" src="./assets/images/close_cross.svg" alt="Icon de croix fermeture">
+            </li>`;
+          })
+          .join('');
 
       // Ré-attacher les événements de clic sur les nouveaux items
       toggleDropdownOptions(selectedItems, updateSelectionCallback);
@@ -58,9 +58,9 @@ function toggleDropdownOptions(selectedItems, updateSelectionCallback) {
     item.addEventListener('click', () => {
       item.classList.toggle('active');
       const closeSvg = item.querySelector('.dropdown-item-close-svg');
-        if (closeSvg) {
-          closeSvg.classList.toggle('show_close_svg');
-        }
+      if (closeSvg) {
+        closeSvg.classList.toggle('show_close_svg');
+      }
       const itemText = item.querySelector('.dropdown-item').textContent.trim();
 
       // Utiliser le callback pour mettre à jour les éléments sélectionnés
