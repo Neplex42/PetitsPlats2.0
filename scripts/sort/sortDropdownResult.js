@@ -7,6 +7,8 @@ const SELECTOR_DROPDOWN_ITEM_CLOSE_SVG = '.dropdown-item-close-svg';
 const SELECTOR_OPTIONS_BAR = '.options-bar';
 const SELECTOR_SELECTED_OPTION = '.selected-option';
 
+//test new branch
+
 export function setupDropdownFilter(inputSelector, clearSearchInput, optionsArray, dropdownSelector, selectedItems, updateSelectionCallback) {
   const searchInput = document.querySelector(inputSelector);
   const clearSearch = document.querySelector(clearSearchInput);
