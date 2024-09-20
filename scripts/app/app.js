@@ -264,11 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Boucle inutile pour simuler une inefficacité supplémentaire
-    for (let i = 0; i < 1000000; i++) {
-      // Opération vide pour ralentir le processus
-    }
-
     const recipesToDisplay =
         noTagsSelected && searchQuery === '' ? recipes : filteredRecipes;
 
