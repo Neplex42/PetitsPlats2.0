@@ -78,28 +78,49 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateFilteredRecipes() {
-    const searchQuery = document.getElementById('search-input').value.toLowerCase();
+    let searchQuery = document.getElementById('search-input').value.toLowerCase();
 
-    const noTagsSelected = selectedIngredients.length === 0 && selectedAppliances.length === 0 && selectedUtensils.length === 0;
+    // Ignorer la recherche si moins de 3 caractères sont saisis
+    if (searchQuery.length < 3) {
+      searchQuery = '';
+    }
 
-    const filteredRecipes = recipes.filter(recipe => {
-      const matchesIngredients = selectedIngredients.every(ingredient =>
-          recipe.ingredients.some(i => i.ingredient.toLowerCase() === ingredient.toLowerCase())
+    const noTagsSelected =
+        selectedIngredients.length === 0 &&
+        selectedAppliances.length === 0 &&
+        selectedUtensils.length === 0;
+
+    const filteredRecipes = recipes.filter((recipe) => {
+      const matchesIngredients = selectedIngredients.every((ingredient) =>
+          recipe.ingredients.some(
+              (i) => i.ingredient.toLowerCase() === ingredient.toLowerCase()
+          )
       );
-      const matchesAppliances = selectedAppliances.length === 0 || selectedAppliances.includes(recipe.appliance);
-      const matchesUtensils = selectedUtensils.every(utensil =>
+      const matchesAppliances =
+          selectedAppliances.length === 0 ||
+          selectedAppliances.includes(recipe.appliance);
+      const matchesUtensils = selectedUtensils.every((utensil) =>
           recipe.ustensils.includes(utensil)
       );
 
-      const matchesSearchQuery = searchQuery === '' ||
+      const matchesSearchQuery =
+          searchQuery === '' ||
           recipe.name.toLowerCase().includes(searchQuery) ||
-          recipe.ingredients.some(i => i.ingredient.toLowerCase().includes(searchQuery)) ||
+          recipe.ingredients.some((i) =>
+              i.ingredient.toLowerCase().includes(searchQuery)
+          ) ||
           recipe.description.toLowerCase().includes(searchQuery);
 
-      return matchesIngredients && matchesAppliances && matchesUtensils && matchesSearchQuery;
+      return (
+          matchesIngredients &&
+          matchesAppliances &&
+          matchesUtensils &&
+          matchesSearchQuery
+      );
     });
 
-    const recipesToDisplay = noTagsSelected && searchQuery === '' ? recipes : filteredRecipes;
+    const recipesToDisplay =
+        noTagsSelected && searchQuery === '' ? recipes : filteredRecipes;
 
     displayRecipes(recipesToDisplay);
     showRecettesCount(recipesToDisplay);
