@@ -1,59 +1,46 @@
-// Fonction qui crée les dropdowns
-export function createTagDropdown(dropdownId, dropdownTag, dropdownName, itemsList) {
+export function createTagDropdown(dropdownId, dropdownTag, dropdownName) {
   const dropdownContainer = document.createElement("div");
-  dropdownContainer.classList.add("filter-bar__options"); // Conteneur principal
+  dropdownContainer.classList.add("filter-bar__options");
 
-  // Création du bouton du dropdown
   const toggleButton = createDropdownButton(dropdownId, dropdownName);
+  const dropdownMenu = createDropdownMenu(dropdownId, dropdownTag, dropdownName);
 
-  // Création du menu déroulant
-  const dropdownMenu = createDropdownMenu(dropdownId, dropdownTag, dropdownName, itemsList);
-
-  // Assemblage du dropdown
   dropdownContainer.appendChild(toggleButton);
   dropdownContainer.appendChild(dropdownMenu);
 
-  return dropdownContainer; // Retourne le dropdown complet
+  return dropdownContainer;
 }
 
-// Fonction pour créer le bouton du dropdown
 function createDropdownButton(dropdownId, dropdownName) {
   const button = document.createElement("button");
   button.id = `${dropdownId}-Dropdown`;
-  button.classList.add("filter-button", "dropdown-toggle"); // Classes pour le style
+  button.classList.add("filter-button", "dropdown-toggle");
   button.setAttribute('aria-expanded', 'false');
 
   button.innerHTML = `
     ${dropdownName}
-    <i class="bi bi-chevron-down" aria-hidden="true"></i>`; // Icône de chevron
+    <i class="bi bi-chevron-down" aria-hidden="true"></i>`;
 
   return button;
 }
 
-// Fonction pour créer le menu déroulant
-function createDropdownMenu(dropdownId, dropdownTag, dropdownName, itemsList) {
+function createDropdownMenu(dropdownId, dropdownTag, dropdownName) {
   const dropdown = document.createElement("div");
   dropdown.id = `${dropdownId}-list`;
   dropdown.classList.add('dropdown-menu', `dropdown-${dropdownId}`, `dropdown-${dropdownTag}`);
   dropdown.setAttribute('aria-labelledby', `${dropdownId}-Dropdown`);
 
-  // Générer la zone de recherche
   const searchBar = createSearchBar(dropdownId, dropdownName);
 
-  // Générer le contenu du dropdown
-  const dropdownContent = generateDropdownContent(itemsList);
-
-  // Construire le menu déroulant
   dropdown.innerHTML = `
     ${searchBar}
     <ul class="dropdown-options" role="listbox">
-        ${dropdownContent}
+        <!-- Les options seront insérées dynamiquement -->
     </ul>`;
 
   return dropdown;
 }
 
-// Fonction pour créer la zone de recherche
 function createSearchBar(dropdownId, dropdownName) {
   return `
     <div class="sticky">
@@ -66,13 +53,4 @@ function createSearchBar(dropdownId, dropdownName) {
           <i class="bi bi-search" aria-hidden="true"></i>
       </button>
     </div>`;
-}
-
-// Fonction pour générer le contenu des dropdowns
-function generateDropdownContent(itemsList) {
-  return itemsList.map(item => `
-    <li class="dropdown-options_item">
-      <p class="dropdown-item">${item}</p>
-      <img class="dropdown-item-close-svg" src="./assets/images/close_cross.svg" alt="Icône de fermeture">
-    </li>`).join(""); // Concatène les items en une seule chaîne
 }

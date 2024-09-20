@@ -1,8 +1,6 @@
 import { createRecipeCard } from "../factory/recipeCardFactory.js";
 import { createTagDropdown } from "../factory/tagDropdownFactory.js";
-import { setupDropdownFilter } from "../sort/sortDropdownResult.js";
 
-// Description: Fonction qui affiche les recettes
 export function displayRecipes(recipes) {
   const recipeCards = document.querySelector(".recipes-cards");
   const errorMessage = document.querySelector(".recipes-cards__error-message");
@@ -21,8 +19,7 @@ export function displayRecipes(recipes) {
   }
 }
 
-// Fonction pour afficher les dropdowns de manière unique pour chaque catégorie
-export function displayTagDropdowns(recipes, selectedIngredients, selectedAppliances, selectedUtensils) {
+export function displayTagDropdowns(recipes) {
   let allIngredients = [];
   let allAppliances = new Set();
   let allUstensils = new Set();
@@ -45,20 +42,25 @@ export function displayTagDropdowns(recipes, selectedIngredients, selectedApplia
 
   if (!filterOptions) return;
 
+  // Assurez-vous que l'élément options-bar existe
+  let optionsBar = document.querySelector('.options-bar');
+  if (!optionsBar) {
+    optionsBar = document.createElement('div');
+    optionsBar.classList.add('options-bar');
+    // Insérez optionsBar avant filterOptions ou à l'endroit souhaité
+    filterOptions.parentNode.insertBefore(optionsBar, filterOptions);
+  }
+
+  // Création des dropdowns
   const ingredientsDropdown = createTagDropdown(1, 'ingredients', "Ingrédients", uniqueIngredients);
   const appliancesDropdown = createTagDropdown(2, 'appliances', "Appareils", uniqueAppliances);
   const utensilsDropdown = createTagDropdown(3, 'utensils', "Ustensiles", uniqueUstensils);
 
+  filterOptions.innerHTML = ''; // Vider le contenu existant pour éviter les doublons
   filterOptions.appendChild(ingredientsDropdown);
   filterOptions.appendChild(appliancesDropdown);
   filterOptions.appendChild(utensilsDropdown);
-
-  // Passer les tags sélectionnés aux filtres
-  setupDropdownFilter('.dropdown-1 .form-control', '.form-control__icon-clear-1', uniqueIngredients, '.dropdown-1 .dropdown-options', selectedIngredients);
-  setupDropdownFilter('.dropdown-2 .form-control', '.form-control__icon-clear-2', uniqueAppliances, '.dropdown-2 .dropdown-options', selectedAppliances);
-  setupDropdownFilter('.dropdown-3 .form-control', '.form-control__icon-clear-3', uniqueUstensils, '.dropdown-3 .dropdown-options', selectedUtensils);
 }
-
 
 export function showRecettesCount(array) {
   const sectionFilter = document.querySelector('section.filter');

@@ -163,12 +163,14 @@
   transform: rotate(180deg);
 }
 
-.filter-bar .options-bar {
+.filter .options-bar {
   width: 100vw;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
   max-width: 100%;
+  margin-bottom: 40px;
+  margin-top: 20px;
 }
 
 .options-bar .selected-option {
@@ -178,8 +180,12 @@
   display: flex;
   align-items: center;
   gap: 60px;
-  font-size: 14px;
   cursor: pointer;
+}
+
+.options-bar .selected-option p {
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .options-bar p::first-letter {
@@ -220,7 +226,7 @@
     position: relative;
   }
 
-  .filter-bar .options-bar {
+  .filter .options-bar {
     justify-content: center;
   }
 }
