@@ -7,8 +7,6 @@ const SELECTOR_DROPDOWN_ITEM_CLOSE_SVG = '.dropdown-item-close-svg';
 const SELECTOR_OPTIONS_BAR = '.options-bar';
 const SELECTOR_SELECTED_OPTION = '.selected-option';
 
-//test new branch
-
 export function setupDropdownFilter(inputSelector, clearSearchInput, optionsArray, dropdownSelector, selectedItems, updateSelectionCallback) {
   const searchInput = document.querySelector(inputSelector);
   const clearSearch = document.querySelector(clearSearchInput);
@@ -28,9 +26,13 @@ export function setupDropdownFilter(inputSelector, clearSearchInput, optionsArra
       const currentValue = event.target.value.toLowerCase();
 
       // Filtrer les options correspondant à la recherche
-      const filteredOptions = optionsArray.filter(option =>
-        option.toLowerCase().includes(currentValue)
-      );
+      const filteredOptions = [];
+      for (let i = 0; i < optionsArray.length; i++) {
+        const option = optionsArray[i];
+        if (option.toLowerCase().includes(currentValue)) {
+          filteredOptions.push(option);
+        }
+      }
 
       // Mettre à jour la liste des options filtrées
       renderDropdownOptions(dropdownList, filteredOptions, selectedItems);
@@ -58,16 +60,23 @@ export function setupDropdownFilter(inputSelector, clearSearchInput, optionsArra
  * Rendu des options du menu déroulant.
  */
 function renderDropdownOptions(dropdownList, optionsArray, selectedItems) {
-  dropdownList.innerHTML = optionsArray
-    .map(option => {
-      const isActive = selectedItems.includes(option);
-      return `
-        <li class="dropdown-options_item${isActive ? ` ${CLASS_ACTIVE}` : ''}" data-item-text="${option}">
-          <p class="dropdown-item">${option}</p>
-          <img class="dropdown-item-close-svg${isActive ? ` ${CLASS_SHOW_CLOSE_SVG}` : ''}" src="./assets/images/close_cross.svg" alt="Icône de fermeture">
-        </li>`;
-    })
-    .join('');
+  let innerHTML = '';
+  for (let i = 0; i < optionsArray.length; i++) {
+    const option = optionsArray[i];
+    let isActive = false;
+    for (let j = 0; j < selectedItems.length; j++) {
+      if (selectedItems[j] === option) {
+        isActive = true;
+        break;
+      }
+    }
+    innerHTML += `
+      <li class="dropdown-options_item${isActive ? ` ${CLASS_ACTIVE}` : ''}" data-item-text="${option}">
+        <p class="dropdown-item">${option}</p>
+        <img class="dropdown-item-close-svg${isActive ? ` ${CLASS_SHOW_CLOSE_SVG}` : ''}" src="./assets/images/close_cross.svg" alt="Icône de fermeture">
+      </li>`;
+  }
+  dropdownList.innerHTML = innerHTML;
 }
 
 /**
@@ -76,11 +85,12 @@ function renderDropdownOptions(dropdownList, optionsArray, selectedItems) {
 function attachDropdownItemEventListeners(dropdownList, selectedItems, updateSelectionCallback) {
   const dropdownItems = dropdownList.querySelectorAll(SELECTOR_DROPDOWN_ITEM);
 
-  dropdownItems.forEach((item) => {
+  for (let i = 0; i < dropdownItems.length; i++) {
+    const item = dropdownItems[i];
     item.addEventListener('click', () => {
       handleDropdownItemClick(item, selectedItems, updateSelectionCallback);
     });
-  });
+  }
 }
 
 /**

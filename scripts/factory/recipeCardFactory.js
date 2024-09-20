@@ -35,13 +35,14 @@ export function createRecipeCard(data) {
 
 // Description: Fonction qui génère la liste des ingrédients
 function generateIngredientsList(ingredients) {
-  return ingredients
-    .map(
-      ({ ingredient, quantity = "", unit = "" }) => `
-    <li class="card-description__item">
-      <p class="card-description__item-ingredients">${ingredient}</p>
-      <p class="card-description__item-quantity">${quantity} ${unit}</p>
-    </li>`
-    )
-    .join("");
+  let result = '';
+  for (let i = 0; i < ingredients.length; i++) {
+    const { ingredient, quantity = "", unit = "" } = ingredients[i];
+    result += `
+      <li class="card-description__item">
+        <p class="card-description__item-ingredients">${ingredient}</p>
+        <p class="card-description__item-quantity">${quantity} ${unit}</p>
+      </li>`;
+  }
+  return result;
 }

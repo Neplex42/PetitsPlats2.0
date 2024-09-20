@@ -70,9 +70,14 @@ function createSearchBar(dropdownId, dropdownName) {
 
 // Fonction pour générer le contenu des dropdowns
 function generateDropdownContent(itemsList) {
-  return itemsList.map(item => `
-    <li class="dropdown-options_item">
-      <p class="dropdown-item">${item}</p>
-      <img class="dropdown-item-close-svg" src="./assets/images/close_cross.svg" alt="Icône de fermeture">
-    </li>`).join(""); // Concatène les items en une seule chaîne
+  let content = '';
+  for (let i = 0; i < itemsList.length; i++) {
+    const item = itemsList[i];
+    content += `
+      <li class="dropdown-options_item">
+        <p class="dropdown-item">${item}</p>
+        <img class="dropdown-item-close-svg" src="./assets/images/close_cross.svg" alt="Icône de fermeture">
+      </li>`;
+  }
+  return content;
 }

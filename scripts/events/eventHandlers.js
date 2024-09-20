@@ -17,7 +17,12 @@ export function displayRecipes(recipes) {
     if (errorMessage) {
       errorMessage.style.display = "none";
     }
-    recipeCards.innerHTML = recipes.map(recipe => createRecipeCard(recipe).outerHTML).join("");
+    let innerHTML = '';
+    for (let i = 0; i < recipes.length; i++) {
+      const recipe = recipes[i];
+      innerHTML += createRecipeCard(recipe).outerHTML;
+    }
+    recipeCards.innerHTML = innerHTML;
   }
 }
 
@@ -27,15 +32,18 @@ export function displayTagDropdowns(recipes, selectedIngredients, selectedApplia
   let allAppliances = new Set();
   let allUstensils = new Set();
 
-  recipes.forEach((recipe) => {
-    recipe.ingredients.forEach((ingredient) => {
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+    for (let j = 0; j < recipe.ingredients.length; j++) {
+      const ingredient = recipe.ingredients[j];
       allIngredients.push(ingredient.ingredient);
-    });
+    }
     allAppliances.add(recipe.appliance);
-    recipe.ustensils.forEach((utensil) => {
+    for (let k = 0; k < recipe.ustensils.length; k++) {
+      const utensil = recipe.ustensils[k];
       allUstensils.add(utensil);
-    });
-  });
+    }
+  }
 
   let uniqueIngredients = [...new Set(allIngredients)];
   let uniqueAppliances = Array.from(allAppliances);
@@ -58,7 +66,6 @@ export function displayTagDropdowns(recipes, selectedIngredients, selectedApplia
   setupDropdownFilter('.dropdown-2 .form-control', '.form-control__icon-clear-2', uniqueAppliances, '.dropdown-2 .dropdown-options', selectedAppliances);
   setupDropdownFilter('.dropdown-3 .form-control', '.form-control__icon-clear-3', uniqueUstensils, '.dropdown-3 .dropdown-options', selectedUtensils);
 }
-
 
 export function showRecettesCount(array) {
   const sectionFilter = document.querySelector('section.filter');
