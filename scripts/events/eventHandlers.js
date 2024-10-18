@@ -27,8 +27,6 @@ export function displayRecipes(recipes) {
 function updateErrorMessage(searchQuery) {
   if (searchQuery.length >= 3 && errorMessage) {
     errorMessage.textContent = `Aucune recette ne contient '${searchQuery}', vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
-  } else if (errorMessage) {
-    errorMessage.textContent = "Aucune recette ne correspond à vos critères… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
   }
 }
 
