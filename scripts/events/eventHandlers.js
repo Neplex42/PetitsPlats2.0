@@ -4,11 +4,15 @@ import { createTagDropdown } from "../factory/tagDropdownFactory.js";
 export function displayRecipes(recipes) {
   const recipeCards = document.querySelector(".recipes-cards");
   const errorMessage = document.querySelector(".recipes-cards__error-message");
+  const searchInput = document.getElementById('search-input');
 
   recipeCards.innerHTML = "";
   if (recipes.length === 0) {
     if (errorMessage) {
-      errorMessage.textContent = `Aucune recette ne correspond à votre recherche avec les filtres actuels.`;
+      searchInput.addEventListener('input', () => {
+        let searchQuery = searchInput.value.toLowerCase();
+        updateErrorMessage(searchQuery);
+      });
       errorMessage.style.display = "flex";
     }
   } else {
@@ -16,6 +20,16 @@ export function displayRecipes(recipes) {
       errorMessage.style.display = "none";
     }
     recipeCards.innerHTML = recipes.map(recipe => createRecipeCard(recipe).outerHTML).join("");
+  }
+}
+
+function updateErrorMessage(searchQuery) {
+  const errorMessage = document.querySelector(".recipes-cards__error-message");
+
+  if (searchQuery.length >= 3 && errorMessage) {
+    errorMessage.textContent = `Aucune recette ne contient '${searchQuery}', vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
+  } else if (errorMessage) {
+    errorMessage.textContent = "Aucune recette ne correspond à vos critères… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
   }
 }
 
