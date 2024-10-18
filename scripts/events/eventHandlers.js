@@ -1,9 +1,10 @@
 import { createRecipeCard } from "../factory/recipeCardFactory.js";
 import { createTagDropdown } from "../factory/tagDropdownFactory.js";
 
+const errorMessage = document.querySelector(".recipes-cards__error-message");
+
 export function displayRecipes(recipes) {
   const recipeCards = document.querySelector(".recipes-cards");
-  const errorMessage = document.querySelector(".recipes-cards__error-message");
   const searchInput = document.getElementById('search-input');
 
   recipeCards.innerHTML = "";
@@ -24,8 +25,6 @@ export function displayRecipes(recipes) {
 }
 
 function updateErrorMessage(searchQuery) {
-  const errorMessage = document.querySelector(".recipes-cards__error-message");
-
   if (searchQuery.length >= 3 && errorMessage) {
     errorMessage.textContent = `Aucune recette ne contient '${searchQuery}', vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
   } else if (errorMessage) {
